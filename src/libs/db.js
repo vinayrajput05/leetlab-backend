@@ -1,4 +1,4 @@
-import { PrismaClient } from '../generated/prisma/index.js'
+import { PrismaClient } from '../generated/prisma/index.js';
 
 // Create a global reference to avoid creating multiple PrismaClient instances in development
 const globalForPrisma = globalThis;

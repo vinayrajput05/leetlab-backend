@@ -2,9 +2,9 @@
 class ApiError extends Error {
   constructor(
     statusCode, // HTTP status code (e.g., 400, 404, 500, etc.)
-    message = "Something went wrong", // Default error message if not provided
+    message = 'Something went wrong', // Default error message if not provided
     errors = [], // Optional array of validation or internal errors
-    stack = "", // Optional custom stack trace
+    stack = '', // Optional custom stack trace
   ) {
     super(message); // Call parent constructor with message
     this.statusCode = statusCode; // Custom property to hold status code
