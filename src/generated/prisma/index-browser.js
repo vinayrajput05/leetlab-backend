@@ -132,7 +132,7 @@ exports.Prisma.ProblemScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  defficulty: 'defficulty',
+  difficulty: 'difficulty',
   tags: 'tags',
   userId: 'userId',
   examples: 'examples',
@@ -142,6 +142,47 @@ exports.Prisma.ProblemScalarFieldEnum = {
   testcases: 'testcases',
   codeSnippets: 'codeSnippets',
   referenceSolutions: 'referenceSolutions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SubmissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  problemId: 'problemId',
+  sourceCode: 'sourceCode',
+  language: 'language',
+  stdin: 'stdin',
+  stdout: 'stdout',
+  stderr: 'stderr',
+  compileOutput: 'compileOutput',
+  status: 'status',
+  memory: 'memory',
+  time: 'time',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TestcaseResultScalarFieldEnum = {
+  id: 'id',
+  submissionId: 'submissionId',
+  testCase: 'testCase',
+  passed: 'passed',
+  stdout: 'stdout',
+  expected: 'expected',
+  stderr: 'stderr',
+  compileOutput: 'compileOutput',
+  status: 'status',
+  memory: 'memory',
+  time: 'time',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProblemSolvedScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  problemId: 'problemId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -175,7 +216,7 @@ exports.UserRole = exports.$Enums.UserRole = {
   USER: 'USER'
 };
 
-exports.DefficultyLevel = exports.$Enums.DefficultyLevel = {
+exports.DifficultyLevel = exports.$Enums.DifficultyLevel = {
   EASY: 'EASY',
   MEDIUM: 'MEDIUM',
   HARD: 'HARD'
@@ -183,7 +224,10 @@ exports.DefficultyLevel = exports.$Enums.DefficultyLevel = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Problem: 'Problem'
+  Problem: 'Problem',
+  Submission: 'Submission',
+  TestcaseResult: 'TestcaseResult',
+  ProblemSolved: 'ProblemSolved'
 };
 
 /**
