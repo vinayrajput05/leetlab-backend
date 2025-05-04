@@ -8,6 +8,14 @@ export const getJudge0LanguageId = (language) => {
   };
   return languageMap[language.toUpperCase()] ?? null;
 };
+export const getJudge0LanguageName = (language_id) => {
+  const languageMap = {
+    71: 'PYTHON',
+    62: 'JAVA',
+    63: 'JAVASCRIPT',
+  };
+  return languageMap[language_id] || 'Unknown';
+};
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
