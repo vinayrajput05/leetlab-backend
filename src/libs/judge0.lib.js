@@ -12,7 +12,6 @@ export const getJudge0LanguageId = (language) => {
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const submitBatch = async (submissions) => {
-
   try {
     const options = {
       baseURL: process.env.JUDGE0_API_URL,
@@ -21,10 +20,10 @@ export const submitBatch = async (submissions) => {
       headers: {
         'x-rapidapi-key': process.env.RAPIDAPI_KEY,
         'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      data: { submissions }
-    }
+      data: { submissions },
+    };
     const { data } = await axios.request(options);
     // console.log('submitBatch response', data);
 
@@ -38,7 +37,6 @@ export const submitBatch = async (submissions) => {
 
 export const pollBatchResults = async (tokens) => {
   while (true) {
-
     const options = {
       baseURL: process.env.JUDGE0_API_URL,
       url: 'submissions/batch',
@@ -51,7 +49,7 @@ export const pollBatchResults = async (tokens) => {
         tokens: tokens.join(','),
         base64_encoded: false,
       },
-    }
+    };
     const { data } = await axios.request(options);
     const results = data.submissions;
 
@@ -60,6 +58,5 @@ export const pollBatchResults = async (tokens) => {
     );
     if (isAllDone) return results;
     await sleep(1000);
-
   }
 };

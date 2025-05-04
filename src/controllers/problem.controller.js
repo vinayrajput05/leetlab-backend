@@ -1,5 +1,9 @@
 import { db } from '../libs/db.js';
-import { getJudge0LanguageId, pollBatchResults, submitBatch } from '../libs/judge0.lib.js';
+import {
+  getJudge0LanguageId,
+  pollBatchResults,
+  submitBatch,
+} from '../libs/judge0.lib.js';
 import ApiError from '../utils/api-error.js';
 import ApiResponse from '../utils/api-response.js';
 
@@ -49,7 +53,7 @@ export const createProblem = async (req, res, next) => {
       const results = await pollBatchResults(tokens);
       for (let i = 0; i < results.length; i++) {
         const result = results[i];
-        console.log("Result----", result);
+        console.log('Result----', result);
 
         if (result.status.id !== 3) {
           throw new ApiError(
@@ -90,20 +94,24 @@ export const getAllProblems = async (req, res, next) => {
     if (!problems) {
       throw new ApiError(404, 'No problems found');
     }
-    res.status(200).json(new ApiResponse(200, problems, 'Problems fetched successfully'));
+    res
+      .status(200)
+      .json(new ApiResponse(200, problems, 'Problems fetched successfully'));
   } catch (error) {
     next(error);
   }
 };
 
 export const getProblemById = async (req, res, next) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
     const problem = await db.problem.findUnique({ where: { id } });
     if (!problem) {
       throw new ApiError(404, 'Problem not found');
     }
-    res.status(200).json(new ApiResponse(200, problem, 'Problem fetched successfully'));
+    res
+      .status(200)
+      .json(new ApiResponse(200, problem, 'Problem fetched successfully'));
   } catch (error) {
     next(error);
   }
@@ -163,7 +171,7 @@ export const updateProblem = async (req, res, next) => {
       const results = await pollBatchResults(tokens);
       for (let i = 0; i < results.length; i++) {
         const result = results[i];
-        console.log("Result----", result);
+        console.log('Result----', result);
 
         if (result.status.id !== 3) {
           throw new ApiError(
@@ -176,7 +184,7 @@ export const updateProblem = async (req, res, next) => {
       //  save problem in database
       const updateProblem = await db.problem.update({
         where: {
-          id: problemId
+          id: problemId,
         },
         data: {
           title,
@@ -193,7 +201,9 @@ export const updateProblem = async (req, res, next) => {
 
       return res
         .status(200)
-        .json(new ApiResponse(200, updateProblem, 'Problem updated successfully'));
+        .json(
+          new ApiResponse(200, updateProblem, 'Problem updated successfully'),
+        );
     }
   } catch (error) {
     next(error);
@@ -201,7 +211,7 @@ export const updateProblem = async (req, res, next) => {
 };
 
 export const deleteProblem = async (req, res, next) => {
-  const { id } = req.params
+  const { id } = req.params;
 
   try {
     const problem = await db.problem.findUnique({ where: { id } });
@@ -214,7 +224,7 @@ export const deleteProblem = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: 'Problem deleted successfully',
-    })
+    });
   } catch (error) {
     console.log('deleteProblem error', error);
 
@@ -222,4 +232,4 @@ export const deleteProblem = async (req, res, next) => {
   }
 };
 
-export const getAllProblemsSolvedyUser = async (req, res, next) => { };
+export const getAllProblemsSolvedyUser = async (req, res, next) => {};
