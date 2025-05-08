@@ -221,10 +221,9 @@ export const deleteProblem = async (req, res, next) => {
 
     await db.problem.delete({ where: { id } });
 
-    res.status(200).json({
-      success: true,
-      message: 'Problem deleted successfully',
-    });
+    res
+      .status(200)
+      .json(new ApiResponse(200, {}, 'Problem deleted successfully'));
   } catch (error) {
     console.log('deleteProblem error', error);
 
@@ -232,4 +231,30 @@ export const deleteProblem = async (req, res, next) => {
   }
 };
 
-export const getAllProblemsSolvedyUser = async (req, res, next) => {};
+export const getAllProblemsSolvedyUser = async (req, res, next) => {
+  try {
+    const problems = await db.problem.findMany({
+      where: {
+        solvedBy: {
+          some: {
+            userId: req.user.id,
+          },
+        },
+      },
+      include: {
+        solvedBy: {
+          where: {
+            userId: req.user.id,
+          },
+        },
+      },
+    });
+
+    res
+      .status(200)
+      .json(new ApiResponse(200, problems, 'Problems fetched successfully'));
+  } catch (error) {
+    console.log('getAllProblemsSolvedyUser error', error);
+    next(error);
+  }
+};
